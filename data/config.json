@@ -1,0 +1,7 @@
+{
+  "adminPass": "admin123",
+  "whitelist": {
+    "siswa1": { "password": "1234", "allowed": true },
+    "siswa2": { "password": "abcd", "allowed": true }
+  }
+}

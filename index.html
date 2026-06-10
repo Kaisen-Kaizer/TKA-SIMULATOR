@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Simulator TKA - SMP</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="wrap">
+    <header class="site-header">
+      <div class="brand">
+        <img id="logo" src="assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+        <div>
+          <h1>Simulator TKA - Tingkatan SMP</h1>
+          <p>Pilih peran untuk memulai: <strong>Calon TKA</strong> atau <strong>Panitia</strong></p>
+        </div>
+      </div>
+    </header>
+
+    <section id="role-select" class="card role-select">
+      <button id="btn-calon" class="btn btn-primary">Calon TKA</button>
+      <button id="btn-panitia" class="btn btn-secondary">Panitia</button>
+    </section>
+
+    <section id="calon-panel" class="card hidden">
+      <h2>Calon TKA - Mulai Tes</h2>
+      <div id="login-area">
+        <label>Nama peserta <input id="login-username" placeholder="Nama pengguna..."/></label>
+        <label>Password <input id="login-password" type="password" placeholder="Password..."/></label>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+          <button id="login-btn" class="btn">Login</button>
+          <div id="login-status" class="small" style="margin-left:8px;color:#fff"></div>
+        </div>
+      </div>
+      <label id="name-wrap" style="display:none">Nama peserta <input id="candidate-name" placeholder="Nama..." readonly/></label>
+      <div id="resume-area" style="margin-top:10px;display:none">
+        <p class="small">Found a previous session:</p>
+        <div id="resume-info" class="small"></div>
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <button id="btn-resume" class="btn outline">Resume</button>
+          <button id="btn-view-result" class="btn btn-primary">View Result</button>
+          <button id="btn-clear-session" class="btn btn-secondary">Clear</button>
+        </div>
+      </div>
+      <label id="level-wrap" class="hidden">Pilih level:
+        <select id="level-select">
+          <option value="1">Level 1 (Mudah)</option>
+          <option value="2">Level 2</option>
+          <option value="3">Level 3</option>
+          <option value="4">Level 4</option>
+          <option value="5">Level 5 (Sulit)</option>
+        </select>
+      </label>
+      <button id="start-quiz" class="btn hidden">Mulai</button>
+    </section>
+
+    <section id="panitia-panel" class="card hidden">
+      <h2>Panel Panitia</h2>
+      <div class="panitia-tabs" style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+        <button id="tab-monitor" class="btn btn-primary">Monitor</button>
+        <button id="tab-whitelist" class="btn btn-outline">Whitelist</button>
+        <button id="panitia-logout" class="btn outline" style="margin-left:auto">Logout</button>
+      </div>
+
+      <div id="panitia-monitor">
+        <div class="panitia-controls" style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <button id="clear-all" class="btn outline">Clear All Progress</button>
+          <small class="small">Per-candidate actions: Delete</small>
+        </div>
+        <div id="panitia-list">Tidak ada peserta aktif.</div>
+        <div id="panitia-detail" class="hidden">
+          <div class="panitia-detail-header">
+            <strong id="detail-name">Nama</strong>
+            <button id="detail-close" class="btn outline">Close</button>
+          </div>
+          <div id="detail-meta" class="small"></div>
+          <div id="detail-answers" class="detail-answers"></div>
+        </div>
+      </div>
+
+      <div id="panitia-whitelist" class="hidden">
+        <h3>Whitelist Peserta (Nama + Password)</h3>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <input id="whitelist-username" placeholder="username" style="padding:8px;border-radius:8px;border:1px solid #ddd" />
+          <input id="whitelist-password" placeholder="password" type="password" style="padding:8px;border-radius:8px;border:1px solid #ddd" />
+          <button id="whitelist-add" class="btn" style="background:linear-gradient(90deg,#38b000,#2fa34a);color:#fff">Add</button>
+        </div>
+        <div id="whitelist-list" class="small"></div>
+      </div>
+      <small>Catatan: buka beberapa tab sebagai peserta untuk melihat pembaruan real-time.</small>
+    </section>
+
+    <section id="panitia-login" class="card hidden">
+      <h2>Panitia Login</h2>
+      <p class="small">Masukkan password panitia untuk mengakses panel monitoring.</p>
+      <label>Password <input id="panitia-password" type="password" placeholder="Panitia password..."/></label>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button id="panitia-login-btn" class="btn btn-primary">Login</button>
+        <button id="panitia-setup-btn" class="btn outline">Setup Admin Password</button>
+      </div>
+      <div id="panitia-login-status" class="small" style="margin-top:8px"></div>
+    </section>
+
+    <section id="quiz-panel" class="card hidden">
+      <div id="quiz-header">
+        <div id="quiz-info"></div>
+        <div class="quiz-meta">
+          <div id="quiz-progress"></div>
+          <div id="quiz-timer" class="timer">--:--</div>
+        </div>
+      </div>
+      <div id="question-area"></div>
+      <div id="quiz-controls">
+        <button id="prev-btn" class="btn outline">Previous</button>
+        <button id="next-btn" class="btn">Next</button>
+        <button id="finish-btn" class="btn danger">Finish</button>
+      </div>
+    </section>
+
+    <section id="result-panel" class="card hidden">
+      <h2>Test Result</h2>
+      <div id="result-summary"></div>
+      <button id="return-home" class="btn">Back</button>
+    </section>
+
+    <footer>
+      <small>Dibuat sebagai Simulator TKA (HTML/CSS/JS)</small>
+    </footer>
+  </main>
+
+  <script src="js/app.js"></script>
+  <div id="global-alert" class="hidden">
+    <div class="alert-box" id="alert-box"></div>
+  </div>
+  <div id="confirm-modal" class="hidden">
+    <div class="confirm-box">
+      <div id="confirm-message" class="confirm-message">Are you sure?</div>
+      <div class="confirm-actions">
+        <button id="confirm-yes" class="btn">Yes</button>
+        <button id="confirm-no" class="btn outline">No</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

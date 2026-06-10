@@ -1,0 +1,135 @@
+
+:root{
+  --bg:#e9f2fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#0b76d1;
+  --accent-2:#1f9ae6;
+  --danger:#d9534f;
+}
+
+*{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial}
+html,body{height:100%;margin:0;color:#0b2540}
+body{
+  background-color:#083041;
+  background-image: linear-gradient(rgba(5,25,48,0.35), rgba(5,25,48,0.35)), url('../assets/background.png');
+  background-size:cover;background-position:center center;background-attachment:fixed;
+}
+.wrap{max-width:1100px;margin:28px auto;padding:20px}
+header{margin-bottom:18px;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,0.4)}
+h1{margin:.2rem 0;font-weight:700}
+.card{background:linear-gradient(180deg,rgb(255, 255, 255),var(--card));padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,.25);margin-bottom:14px}
+.hidden{display:none}
+.btn{color:#000000;border:0;padding:10px 16px;border-radius:9px;cursor:pointer;font-weight:600}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.btn-secondary{background:linear-gradient(90deg,#ff7a7a,#ffb27a)}
+.btn-accent{background:linear-gradient(90deg,#7bdb8a,#3bb8a6)}
+.btn-outline,.btn.outline{background:transparent;color:var(--accent);border:1px solid rgba(11,118,209,0.16)}
+.btn.danger{background:linear-gradient(90deg,#ff6b6b,#ff3b3b);color:#fff}
+label{display:block;margin:8px 0;color:#223248}
+input,select{display:block;margin-top:6px;padding:10px;border-radius:8px;border:1px solid #e5e7eb;width:100%;max-width:520px}
+.site-header .brand{display:flex;gap:12px;align-items:center}
+#logo{width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid rgba(255,255,255,0.12)}
+
+#quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.quiz-meta{display:flex;gap:12px;align-items:center}
+#quiz-timer{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:6px 10px;border-radius:8px;font-weight:700;box-shadow:0 6px 18px rgba(15,80,160,.18)}
+#question-area{min-height:160px;padding:16px;border-radius:10px;border:0;background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(245,250,255,0.6))}
+.option{display:flex;gap:12px;align-items:center;margin:10px 0;padding:12px;border-radius:10px;border:1px solid rgba(11,118,209,0.06);background:#fff;cursor:pointer;transition:all .12s ease}
+.option:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(2,40,80,.06)}
+.option.selected{outline:3px solid rgba(11,118,209,.14);background:linear-gradient(90deg,rgba(31,150,255,.06),rgba(31,120,209,.03))}
+.option .letter{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,#f3f6fb,#eef7ff);color:#0b2540;font-weight:700}
+.option .text{flex:1;color:#0b2540}
+
+/* picked animation - fade and scale out quickly */
+.option.picked{opacity:0;transform:scale(.98) translateY(-6px);transition:all .36s ease;pointer-events:none}
+
+/* Quiz control buttons visibility */
+#quiz-controls{display:flex;gap:10px;justify-content:center;margin-top:14px}
+#quiz-controls .btn{min-width:110px;padding:10px 18px;font-weight:700;box-shadow:0 10px 24px rgba(2,40,80,.08)}
+#quiz-controls .btn.outline{background:transparent;color:#0b2540;border:2px solid rgba(11,118,209,.12);box-shadow:none}
+#quiz-controls .btn:hover{transform:translateY(-2px)}
+#quiz-controls .btn.outline:hover{background:rgba(255,255,255,0.06)}
+#quiz-controls .btn.danger{box-shadow:0 10px 30px rgba(255,50,50,.12)}
+#quiz-progress{color:#213b52;font-weight:600}
+.role-select{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1200;display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:14px;box-shadow:0 22px 48px rgba(2,6,23,.4);align-items:center}
+.role-select .btn{padding:12px 28px;min-width:220px}
+
+/* fade utilities for role select */
+.role-select.fade-out{opacity:0;transition:opacity .32s ease}
+.role-select.fade-in{opacity:1;transition:opacity .28s ease}
+
+/* Panitia list layout: grid with up to 5 columns to reduce vertical scrolling */
+#panitia-list{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:start}
+#panitia-list .item{padding:12px;background:rgba(255,255,255,0.95);border-radius:10px;border:1px solid rgba(2,40,80,0.04);color:#0b2540;cursor:pointer}
+
+@media (max-width:1100px){
+  #panitia-list{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:740px){
+  #panitia-list{grid-template-columns:repeat(1,1fr)}
+}
+
+/* small action buttons for panitia */
+.panitia-btn{padding:6px 10px;font-size:13px;border-radius:8px}
+.panitia-btn.danger{background:linear-gradient(90deg,#ff6b6b,#ff3b3b);color:#ffffff;border:0}
+.panitia-btn.approve{background:linear-gradient(90deg,#6bd37b,#2db08a);color:#fff;border:0}
+.panitia-controls .btn.outline{background:transparent;color:#000000;border:1px solid rgba(255,255,255,0.12)}
+.small{font-size:13px;color:var(--muted)}
+/* Panitia detail panel */
+#panitia-detail{position:fixed;right:24px;top:90px;width:520px;max-height:72vh;overflow:auto;padding:14px;border-radius:12px;background:linear-gradient(180deg,#ffffff, #fbfdff);box-shadow:0 18px 48px rgba(2,6,23,.36);z-index:1500;border:1px solid rgba(2,40,80,0.06)}
+.panitia-detail-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.detail-answers{margin-top:8px}
+.detail-answers .answer-row{display:flex;gap:10px;align-items:flex-start;padding:8px;border-bottom:1px dashed rgba(2,40,80,0.04)}
+.detail-answers .qnum{width:38px;font-weight:700;color:#223248}
+.detail-answers .qtext{flex:1;color:#0b2540}
+.detail-answers .ans{min-width:160px;text-align:right;font-weight:700}
+.detail-answers .ans.correct{color:green}
+.detail-answers .ans.wrong{color:#d9534f}
+
+footer{margin-top:18px;text-align:center;color:#fff}
+
+/* Button color tweaks (desktop + mobile) */
+#whitelist-add{background:linear-gradient(90deg,#38b000,#2fa34a);border:0;color:#fff;padding:8px 12px;border-radius:8px}
+#login-btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;color:#fff;padding:8px 12px;border-radius:8px}
+#next-btn{background:linear-gradient(90deg,#38b000,#2fa34a);border:0;color:#fff;padding:10px 18px;border-radius:8px}
+/* Hide previous by default; JS will show when allowed */
+#prev-btn{display:none}
+
+/* Ensure default .btn has visible background */
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+.btn.outline{background:transparent;color:var(--accent);border:1px solid rgba(11,118,209,0.12)}
+
+/* Global centered alert */
+#global-alert{position:fixed;left:0;top:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;z-index:9999}
+.alert-box{background:linear-gradient(180deg,#fff5f5,#ffecec);border:2px solid #ff3b3b;color:#7a0b0b;padding:18px 22px;border-radius:10px;box-shadow:0 12px 48px rgba(0,0,0,0.2);font-weight:700;min-width:320px;text-align:center}
+.alert-box.hidden{display:none}
+
+/* Ensure the hidden class actually hides the full-screen alert (ID selector is more specific) */
+#global-alert.hidden{display:none}
+
+/* When alert is visible allow pointer events, otherwise don't block interactions */
+#global-alert{pointer-events:none}
+#global-alert:not(.hidden){pointer-events:auto}
+
+/* Confirm modal (Yes/No) */
+#confirm-modal{position:fixed;left:0;top:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;z-index:10000}
+.confirm-box{background:#fff;padding:18px 20px;border-radius:10px;box-shadow:0 12px 48px rgba(0,0,0,0.24);min-width:340px;text-align:center;border:2px solid rgba(11,118,209,0.06)}
+.confirm-message{font-weight:700;color:#223248;margin-bottom:12px}
+.confirm-actions{display:flex;gap:10px;justify-content:center}
+#confirm-modal.hidden{display:none}
+#confirm-yes{background:linear-gradient(90deg,#38b000,#2fa34a);color:#fff}
+#confirm-no{background:transparent;border:1px solid rgba(11,118,209,0.12);color:var(--accent)}
+
+/* resume indicator styles */
+.resume-indicator{font-size:14px;display:inline-block;padding:2px 6px;border-radius:6px;margin-left:6px}
+.resume-indicator.resume-yes{background:linear-gradient(90deg,#e6ffed,#d2f7d9);color:#127a2b;border:1px solid rgba(18,122,43,0.08)}
+.resume-indicator.resume-no{background:linear-gradient(90deg,#f3f4f6,#efefef);color:#6b7280;border:1px solid rgba(0,0,0,0.04)}
+.resume-indicator.no-resume{background:linear-gradient(90deg,#fff1f0,#ffecec);color:#9b1b1b;border:1px solid rgba(255,59,59,0.08)}
+
+@media (max-width:760px){
+  .wrap{padding:14px}
+  #quiz-header{flex-direction:column;align-items:flex-start;gap:8px}
+}
+
+
